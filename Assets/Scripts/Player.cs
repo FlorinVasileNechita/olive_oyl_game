@@ -7,6 +7,18 @@ public class Player : Singleton<Player> {
 	public Vector2 mTouchForce = new Vector2(0f, 2f);
 	private bool mIsJumpAllowed = true;
 
+	void Update()
+	{
+		float 	distanceFromCamera, centerPositionX;
+		distanceFromCamera = (transform.position - Camera.main.transform.position).z;
+		centerPositionX = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, distanceFromCamera)).x;
+
+		
+		transform.position = new Vector3(centerPositionX, 
+		                                 transform.position.y,
+		                                 transform.position.z);
+	}
+
 	public void Jump()
 	{
 		//Debug.Log("Player::Jump");
