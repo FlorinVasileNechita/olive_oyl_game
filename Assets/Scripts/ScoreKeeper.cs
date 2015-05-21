@@ -5,6 +5,9 @@ public class ScoreKeeper: Singleton<ScoreKeeper> {
 
 	protected ScoreKeeper () {}
 
+	GameController sGameController;
+	ScoreSaver sScoreSaver;
+
 	public static int score;
 
 	/// <summary>
@@ -17,7 +20,8 @@ public class ScoreKeeper: Singleton<ScoreKeeper> {
 	
 	void Awake()
 	{
-		//Toolbox.RegisterComponent<ScoreKeeper> ();
+		sGameController = GameController.Instance;
+		sScoreSaver = ScoreSaver.Instance;
 	}
 
 	/// <summary>
@@ -25,7 +29,7 @@ public class ScoreKeeper: Singleton<ScoreKeeper> {
 	/// </summary>
 	public void EndGame()
 	{
-		ScoreSaver.Instance.Save(score);
+		sScoreSaver.Save(score);
 	}
 
 	/// <summary>
@@ -45,6 +49,6 @@ public class ScoreKeeper: Singleton<ScoreKeeper> {
 	/// <param name="score">Score.</param>
 	public void NotifyScoreChanged(int score)
 	{
-		GameController.Instance.ScoreChanged (score);
+		sGameController.ScoreChanged (score);
 	}
 }

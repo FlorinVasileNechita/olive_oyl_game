@@ -5,21 +5,28 @@ public class CoinKeeper : Singleton<CoinKeeper> {
 
 	protected CoinKeeper() {}
 
+	GameController sGameController;
 	
-	public int spawnPowerUpCount;
-	public int coinsCollected;
+	public int mSpawnPowerUpCount;
+	int mCoinsCollected;
 	// Use this for initialization
 	void Awake () {
-		coinsCollected = 0;
+		sGameController = GameController.Instance;
+		mCoinsCollected = 0;
 	}
 
 	public void CoinCollected()
 	{
-		coinsCollected++;
-		Debug.Log ("CoinKeeper::CoinCollected coins = " + coinsCollected);
+		mCoinsCollected++;
+		Debug.Log ("CoinKeeper::CoinCollected coins = " + mCoinsCollected);
 
-		if (coinsCollected % spawnPowerUpCount == 0)
-			GameController.Instance.SpawnPowerUp ();
+		if (mCoinsCollected % mSpawnPowerUpCount == 0)
+			sGameController.SpawnPowerUp ();
 
+	}
+
+	public int getCoinsCollected()
+	{
+		return mCoinsCollected;
 	}
 }

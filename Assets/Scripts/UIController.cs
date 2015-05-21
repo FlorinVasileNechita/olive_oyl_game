@@ -3,9 +3,15 @@ using System.Collections;
 
 public class UIController : Singleton<UIController> {
 
+	GameController sGameController;
+	UICoinsDisplay sUICoinsDisplay;
+	UIScoreDisplay sUIScoreDisplay;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		sGameController = GameController.Instance;
+		sUICoinsDisplay = UICoinsDisplay.Instance;
+		sUIScoreDisplay = UIScoreDisplay.Instance;
 	}
 	
 	// Update is called once per frame
@@ -15,16 +21,16 @@ public class UIController : Singleton<UIController> {
 
 	public int getCoinsCollected()
 	{
-		return GameController.Instance.getCoinsCollected ();
+		return sGameController.getCoinsCollected ();
 	}
 
 	public void CoinCollected(int coins)
 	{
-		UICoinsDisplay.Instance.UpdateDisplay (coins);
+		sUICoinsDisplay.UpdateDisplay (coins);
 	}
 
 	public void ScoreChanged(int score)
 	{
-		UIScoreDisplay.Instance.UpdateDisplay (score);
+		sUIScoreDisplay.UpdateDisplay (score);
 	}
 }

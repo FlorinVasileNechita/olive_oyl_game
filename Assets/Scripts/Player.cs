@@ -4,28 +4,18 @@ using System.Collections;
 public class Player : Singleton<Player> {
 
 	protected Player () {}
-	public Vector2 touchForce = new Vector2(0f, 2f);
-	private bool isJumpAllowed = true;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	void Awake()
-	{
-		//Toolbox.RegisterComponent<Player> ();
-	}
+	public Vector2 mTouchForce = new Vector2(0f, 2f);
+	private bool mIsJumpAllowed = true;
 
 	public void Jump()
 	{
 		//Debug.Log("Player::Jump");
-		if (isJumpAllowed) 
+		if (mIsJumpAllowed) 
 		{
 			Rigidbody2D rigidBody = Player.Instance.GetComponent<Rigidbody2D> ();
 			rigidBody.velocity = Vector2.zero;
-			rigidBody.AddForce (touchForce, ForceMode2D.Impulse);
-			isJumpAllowed = false;
+			rigidBody.AddForce (mTouchForce, ForceMode2D.Impulse);
+			mIsJumpAllowed = false;
 		}
 	}
 
@@ -37,7 +27,7 @@ public class Player : Singleton<Player> {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		isJumpAllowed = true;
+		mIsJumpAllowed = true;
 	}
 
 }

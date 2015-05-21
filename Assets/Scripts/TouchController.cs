@@ -5,14 +5,11 @@ public class TouchController : Singleton<TouchController> {
 
 	protected TouchController () {}
 
-	// Use this for initialization
-	void Start () {
+	GameController sGameController;
 
-	}
-
-	void Awake()
+	void Start()
 	{
-		//Toolbox.RegisterComponent<TouchController> ();
+		sGameController = GameController.Instance;
 	}
 	
 	// Update is called once per frame
@@ -31,6 +28,6 @@ public class TouchController : Singleton<TouchController> {
 
 	void ScreenTouched()
 	{
-		GameController.Instance.Jump ();
+		sGameController.Jump ();
 	}
 }

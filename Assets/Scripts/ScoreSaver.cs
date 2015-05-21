@@ -4,12 +4,7 @@ using System.Collections;
 public class ScoreSaver: Singleton<ScoreSaver> {
 
 	protected ScoreSaver () {}
-
-	void Awake()
-	{
-		Toolbox.RegisterComponent<ScoreSaver> ();
-	}
-
+	
 	public int Load()
 	{
 		return PlayerPrefs.GetInt("highscore");

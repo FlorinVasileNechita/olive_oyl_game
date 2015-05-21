@@ -5,11 +5,11 @@ public class HeartGenerator : Singleton<HeartGenerator> {
 	
 	protected HeartGenerator() {}
 	
-	public 	GameObject 	obj;
+	public 	GameObject 	mObj;
 
 	public void SpawnObject()
 	{
 		Debug.Log("HeartGenerator::SpawnObject()");
-		Instantiate(obj);
+		Instantiate(mObj);
 	}
 }

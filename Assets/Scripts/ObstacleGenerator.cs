@@ -5,18 +5,18 @@ public class ObstacleGenerator : Singleton<ObstacleGenerator> {
 
 	protected ObstacleGenerator() {}
 
-	public 	GameObject 	obstacle;
-	public 	float 		spawnInterval;
+	public 	GameObject 	mObstacle;
+	public 	float 		mSpawnInterval;
 	
 	// Use this for initialization
 	void Start()
 	{
-		InvokeRepeating("CreateObstacle", 1f, spawnInterval);
+		InvokeRepeating("CreateObstacle", 1f, mSpawnInterval);
 	}
 	
 	void CreateObstacle()
 	{
-		Instantiate(obstacle);
+		Instantiate(mObstacle);
 	}
 
 }

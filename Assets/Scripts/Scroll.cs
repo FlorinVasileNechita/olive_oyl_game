@@ -3,23 +3,23 @@ using System.Collections;
 
 public class Scroll : MonoBehaviour {
 	
-	public Vector2 velocity 		= new Vector2(-5, 0); //Decides the obstacles scrolling speed
-	public float range 				= 4;					
-	float 	distanceFromCamera;
-	float 	screenCrossPixelLeft;
-	float 	screenCrossPixelRight;
+	public Vector2 mVelocity 		= new Vector2(-5, 0); //Decides the obstacles scrolling speed
+	public float mYAxisRange 				= 4;					
+	float 	mScreenCrossPixelLeft;
+	float 	mScreenCrossPixelRight;
 	
 	// Use this for initialization
 	void Start()
 	{
-		GetComponent<Rigidbody2D>().velocity = velocity;
-		
-		distanceFromCamera = (transform.position - Camera.main.transform.position).z;
-		screenCrossPixelLeft = 1.3f * Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, distanceFromCamera)).x;
-		screenCrossPixelRight = 1.3f * Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, distanceFromCamera)).x;
+		GetComponent<Rigidbody2D>().velocity = mVelocity;
 
-		transform.position = new Vector3(screenCrossPixelRight, 
-		                                 transform.position.y - range * Random.value, 
+		float 	distanceFromCamera;
+		distanceFromCamera = (transform.position - Camera.main.transform.position).z;
+		mScreenCrossPixelLeft = 1.3f * Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, distanceFromCamera)).x;
+		mScreenCrossPixelRight = 1.3f * Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, distanceFromCamera)).x;
+
+		transform.position = new Vector3(mScreenCrossPixelRight, 
+		                                 transform.position.y - mYAxisRange * Random.value, 
 		                                 transform.position.z);
 		//Debug.Log("scrollObstacle::Update() Right: " + screenCrossPixelRight + " Left: " + screenCrossPixelLeft);
 		
@@ -32,7 +32,7 @@ public class Scroll : MonoBehaviour {
 	
 	void CheckLocation()
 	{
-		if (transform.position.x < screenCrossPixelLeft) 
+		if (transform.position.x < mScreenCrossPixelLeft) 
 		{
 			//Destroying this prefab obstacle
 			Destroy (gameObject);
@@ -41,6 +41,6 @@ public class Scroll : MonoBehaviour {
 	
 	void ChangeSpeed(Vector2 velocity)
 	{
-		GetComponent<Rigidbody2D>().velocity = velocity;
+		GetComponent<Rigidbody2D>().velocity = mVelocity;
 	}
 }

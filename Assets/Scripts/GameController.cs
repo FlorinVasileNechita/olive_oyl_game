@@ -1,10 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GameController : Singleton<GameController> {
 
 	protected GameController () {}
-	
+
+	Player sPlayer;
+
+	//Controllers
+	UIController sUIController;
+
+	//Score managers
+	ScoreKeeper sScoreKeeper;
+	LifeKeeper sLifeKeeper;
+	CoinKeeper sCoinKeeper;
+
+	//PowerUps
+	HeartGenerator sHeartGenerator;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,6 +26,19 @@ public class GameController : Singleton<GameController> {
 	
 	void Awake()
 	{
+		sPlayer = Player.Instance;
+		
+		//Controllers
+		sUIController = UIController.Instance;
+		
+		//Score managers
+		sScoreKeeper = ScoreKeeper.Instance;
+		sLifeKeeper = LifeKeeper.Instance;
+		sCoinKeeper = CoinKeeper.Instance;
+		
+		//PowerUps
+		sHeartGenerator = HeartGenerator.Instance;
+
 		//Toolbox.RegisterComponent<GameController> ();
 	}
 	
@@ -23,46 +49,46 @@ public class GameController : Singleton<GameController> {
 
 	public void Jump()
 	{
-		Player.Instance.Jump ();
+		sPlayer.Jump ();
 	}
 
 	public void Die()
 	{
 		Debug.Log("GameController::Die()");
-		LifeKeeper.Instance.LifeLost ();
-		if (!LifeKeeper.Instance.isLifeLeft ())
+		sLifeKeeper.LifeLost ();
+		if (!sLifeKeeper.isLifeLeft ())
 			GameOver ();
 	}
 
 	public void GameOver()
 	{
 		Debug.Log("GameController::GameOver()");
-		Player.Instance.Die ();
+		sPlayer.Die ();
 	}
 
 	public void CoinCollected()
 	{
-		CoinKeeper.Instance.CoinCollected ();
-		UIController.Instance.CoinCollected (CoinKeeper.Instance.coinsCollected);
+		sCoinKeeper.CoinCollected ();
+		sUIController.CoinCollected (sCoinKeeper.getCoinsCollected());
 	}
 
 	public int getCoinsCollected()
 	{
-		return CoinKeeper.Instance.coinsCollected;
+		return sCoinKeeper.getCoinsCollected();
 	}
 
 	public void ScoreChanged(int score)
 	{
-		UIController.Instance.ScoreChanged (score);
+		sUIController.ScoreChanged (score);
 	}
 
 	public void HeartCollected()
 	{
-		LifeKeeper.Instance.LifeGained ();
+		sLifeKeeper.LifeGained ();
 	}
 
 	public void SpawnPowerUp ()
 	{
-		HeartGenerator.Instance.SpawnObject ();
+		sHeartGenerator.SpawnObject ();
 	}
 }

@@ -3,26 +3,31 @@ using System.Collections;
 
 public class LifeKeeper : Singleton<LifeKeeper> {
 
-	int livesLeft = 3;
+	int mLivesLeft = 3;
 
 	public void LifeLost()
 	{
-		livesLeft--;
-		Debug.Log ("LifeKeeper::LifeLost() livesLeft = " + livesLeft);
+		mLivesLeft--;
+		Debug.Log ("LifeKeeper::LifeLost() livesLeft = " + mLivesLeft);
 	}
 
 	public void LifeGained()
 	{
-		if (livesLeft >= 3)
+		if (mLivesLeft >= 3)
 			return;
-		livesLeft++;
-		Debug.Log ("LifeKeeper::LifeGained() livesLeft = " + livesLeft);
+		mLivesLeft++;
+		Debug.Log ("LifeKeeper::LifeGained() livesLeft = " + mLivesLeft);
 	}
 
 	public bool isLifeLeft()
 	{
-		if (livesLeft != 0)
+		if (mLivesLeft != 0)
 			return true;
 		return false;
+	}
+
+	public int getLivesLeft()
+	{
+		return mLivesLeft;
 	}
 }
