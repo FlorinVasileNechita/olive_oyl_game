@@ -58,6 +58,7 @@ public class GameController : Singleton<GameController> {
 		sLifeKeeper.LifeLost ();
 		if (!sLifeKeeper.isLifeLeft ())
 			GameOver ();
+		sUIController.LivesChanged (sLifeKeeper.getLivesLeft ());
 	}
 
 	public void GameOver()
@@ -85,6 +86,7 @@ public class GameController : Singleton<GameController> {
 	public void HeartCollected()
 	{
 		sLifeKeeper.LifeGained ();
+		sUIController.LivesChanged (sLifeKeeper.getLivesLeft());
 	}
 
 	public void SpawnPowerUp ()
