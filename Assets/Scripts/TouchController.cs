@@ -7,6 +7,8 @@ public class TouchController : Singleton<TouchController> {
 
 	GameController sGameController;
 
+	public string mMenuSceneName;
+
 	void Start()
 	{
 		sGameController = GameController.Instance;
@@ -16,7 +18,7 @@ public class TouchController : Singleton<TouchController> {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-			//Application.LoadLevel("StartMenu");
+			Application.LoadLevel(mMenuSceneName);
 		}
 		
 		if(Input.GetMouseButtonDown(0) ||
