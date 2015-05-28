@@ -18,6 +18,9 @@ public class GameController : Singleton<GameController> {
 	//PowerUps
 	HeartGenerator sHeartGenerator;
 
+    //Member variables
+    public string mGameMenuSceneName;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -47,11 +50,6 @@ public class GameController : Singleton<GameController> {
 	
 	}
 
-	public void Jump()
-	{
-		sPlayer.Jump ();
-	}
-
 	public void Die()
 	{
 		Debug.Log("GameController::Die()");
@@ -65,6 +63,7 @@ public class GameController : Singleton<GameController> {
 	{
 		Debug.Log("GameController::GameOver()");
 		sPlayer.Die ();
+        Application.LoadLevel(mGameMenuSceneName);
 	}
 
 	public void CoinCollected()
@@ -93,4 +92,14 @@ public class GameController : Singleton<GameController> {
 	{
 		sHeartGenerator.SpawnObject ();
 	}
+
+    public void JumpButtonPressed()
+    {
+        sPlayer.Jump();
+    }
+
+    public void DownButtonPressed()
+    {
+        sPlayer.ComeDown();
+    }
 }

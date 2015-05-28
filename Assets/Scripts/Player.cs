@@ -31,10 +31,20 @@ public class Player : Singleton<Player> {
 		}
 	}
 
+    public void ComeDown()
+    {
+        if (!mIsJumpAllowed)
+        {
+            Rigidbody2D rigidBody = Player.Instance.GetComponent<Rigidbody2D>();
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.AddForce(-1.0f * mTouchForce, ForceMode2D.Impulse);
+            mIsJumpAllowed = false;
+        }
+    }
+
 	public void Die()
 	{
 		Debug.Log("Player::Die");
-		Application.Quit ();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)

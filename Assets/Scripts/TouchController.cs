@@ -24,12 +24,17 @@ public class TouchController : Singleton<TouchController> {
 		if(Input.GetMouseButtonDown(0) ||
 		   (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)) 
 		{
-			ScreenTouched();
+			//ScreenTouched();
 		}
 	}
 
-	void ScreenTouched()
-	{
-		sGameController.Jump ();
-	}
+    public void JumpButtonPressed()
+    {
+        sGameController.JumpButtonPressed();
+    }
+
+    public void DownButtonPressed()
+    {
+        sGameController.DownButtonPressed();
+    }
 }
